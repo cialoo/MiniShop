@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>MiniShop Application</title>
+</head>
+<body>
+    <h1>Welcome to MiniShop</h1>
+    <table>
+        <tr>
+            <th>EAN</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Stock</th>
+        </tr>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.ean}">EAN</td>
+            <td th:text="${product.name}">Name</td>
+            <td th:text="${product.price}">Price</td>
+            <td th:text="${product.stock}">Stock</td>
+            <td>
+                <form th:action="@{/products}" method="post">
+                    <input type="hidden" name="ean"  th:value="${product.ean}" />
+                    <input type="hidden" name="name" th:value="${product.name}" />
+                    <input type="hidden" name="price" th:value="${product.price}" />
+                    <input type="hidden" name="stock" th:value="${product.stock}" />
+                    <button type="submit">Add</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <br />
+    <a th:href="@{/}" class="btn btn-primary">Show home</a>
+</body>
+</html>
